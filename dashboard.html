@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Nexus Dashboard - Course Management</title>
+    <meta name="description" content="Comprehensive dashboard for managing courses, students, and analytics in LMS Nexus">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>LMS Nexus</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a href="#dashboard" class="menu-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#courses" class="menu-link">
+                    <i class="fas fa-book"></i>
+                    <span>Courses</span>
+                </a>
+            </li>
+            <li>
+                <a href="#students" class="menu-link">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+            <li>
+                <a href="#analytics" class="menu-link">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a href="#assignments" class="menu-link">
+                    <i class="fas fa-tasks"></i>
+                    <span>Assignments</span>
+                </a>
+            </li>
+            <li>
+                <a href="#messages" class="menu-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Messages</span>
+                    <span class="badge">3</span>
+                </a>
+            </li>
+            <li>
+                <a href="#settings" class="menu-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=JD" alt="Profile" class="profile-img">
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-role">Instructor</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <h1>Dashboard</h1>
+                <p>Welcome back, John! Here's what's happening with your courses.</p>
+            </div>
+            <div class="top-bar-right">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search courses, students...">
+                </div>
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="create-course-btn">
+                    <i class="fas fa-plus"></i>
+                    Create Course
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Overview -->
+        <section class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1,247</h3>
+                    <p>Total Students</p>
+                    <span class="stat-change positive">+12% this month</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24</h3>
+                    <p>Active Courses</p>
+                    <span class="stat-change positive">+3 new this week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>87%</h3>
+                    <p>Avg. Completion</p>
+                    <span class="stat-change positive">+5% vs last month</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>4.8</h3>
+                    <p>Avg. Rating</p>
+                    <span class="stat-change positive">+0.2 this week</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <button class="action-card">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Course</span>
+                </button>
+                <button class="action-card">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Add Student</span>
+                </button>
+                <button class="action-card">
+                    <i class="fas fa-upload"></i>
+                    <span>Upload Content</span>
+                </button>
+                <button class="action-card">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>Schedule Class</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Student Engagement</h3>
+                    <select class="chart-filter">
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                        <option>Last 3 months</option>
+                    </select>
+                </div>
+                <canvas id="engagementChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Course Performance</h3>
+                    <select class="chart-filter">
+                        <option>All Courses</option>
+                        <option>Active Only</option>
+                        <option>Completed</option>
+                    </select>
+                </div>
+                <canvas id="performanceChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="recent-activity">
+            <div class="section-header">
+                <h2>Recent Activity</h2>
+                <a href="#all-activity" class="view-all">View All</a>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p><strong>Sarah Johnson</strong> completed "Introduction to Web Development"</p>
+                        <span class="activity-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p><strong>5 new discussions</strong> in "Advanced JavaScript" forum</p>
+                        <span class="activity-time">3 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p><strong>12 assignments</strong> submitted for grading</p>
+                        <span class="activity-time">5 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p><strong>8 students</strong> earned certificates this week</p>
+                        <span class="activity-time">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Management -->
+        <section class="course-management">
+            <div class="section-header">
+                <h2>Course Management</h2>
+                <button class="btn-primary">Manage All Courses</button>
+            </div>
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://via.placeholder.com/300x200/667eea/ffffff?text=Web+Dev" alt="Web Development">
+                        <div class="course-status active">Active</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>Introduction to Web Development</h3>
+                        <p>Learn HTML, CSS, and JavaScript fundamentals</p>
+                        <div class="course-stats">
+                            <span><i class="fas fa-users"></i> 156 students</span>
+                            <span><i class="fas fa-clock"></i> 8 weeks</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                            <span>78% complete</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://via.placeholder.com/300x200/764ba2/ffffff?text=Python" alt="Python">
+                        <div class="course-status active">Active</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>Python for Beginners</h3>
+                        <p>Master Python programming from scratch</p>
+                        <div class="course-stats">
+                            <span><i class="fas fa-users"></i> 203 students</span>
+                            <span><i class="fas fa-clock"></i> 6 weeks</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%"></div>
+                            </div>
+                            <span>92% complete</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://via.placeholder.com/300x200/f093fb/ffffff?text=Data+Science" alt="Data Science">
+                        <div class="course-status draft">Draft</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>Data Science Fundamentals</h3>
+                        <p>Introduction to data analysis and visualization</p>
+                        <div class="course-stats">
+                            <span><i class="fas fa-users"></i> 0 students</span>
+                            <span><i class="fas fa-clock"></i> 10 weeks</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%"></div>
+                            </div>
+                            <span>25% complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Student Performance -->
+        <section class="student-performance">
+            <div class="section-header">
+                <h2>Top Performing Students</h2>
+                <select class="performance-filter">
+                    <option>This Week</option>
+                    <option>This Month</option>
+                    <option>All Time</option>
+                </select>
+            </div>
+            <div class="performance-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Course</th>
+                            <th>Progress</th>
+                            <th>Score</th>
+                            <th>Last Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/32x32/10b981/ffffff?text=AS" alt="Student">
+                                    <span>Alice Smith</span>
+                                </div>
+                            </td>
+                            <td>Web Development</td>
+                            <td>
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 95%"></div>
+                                </div>
+                            </td>
+                            <td><span class="score excellent">98%</span></td>
+                            <td>2 hours ago</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/32x32/3b82f6/ffffff?text=MJ" alt="Student">
+                                    <span>Mike Johnson</span>
+                                </div>
+                            </td>
+                            <td>Python Basics</td>
+                            <td>
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 88%"></div>
+                                </div>
+                            </td>
+                            <td><span class="score good">92%</span></td>
+                            <td>1 day ago</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-info">
+                                    <img src="https://via.placeholder.com/32x32/8b5cf6/ffffff?text=EB" alt="Student">
+                                    <span>Emma Brown</span>
+                                </div>
+                            </td>
+                            <td>Data Science</td>
+                            <td>
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 76%"></div>
+                                </div>
+                            </td>
+                            <td><span class="score good">85%</span></td>
+                            <td>3 hours ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create Course Modal -->
+    <div class="modal" id="createCourseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Course</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label>Course Title</label>
+                    <input type="text" placeholder="Enter course title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Describe your course" rows="4" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Duration (weeks)</label>
+                        <input type="number" min="1" max="52" value="8">
+                    </div>
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
